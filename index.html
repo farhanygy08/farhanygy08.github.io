@@ -2,151 +2,34 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Halo Teman-Teman Farhan!</title>
+  <title>Pesan Spesial Untuk Kamu</title>
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
-h1>Selamat Datang di Website Saya</h1>
-  <p>Silakan isi form di bawah ini:</p>
-
-  <!-- Iframe Google Forms diletakkan di sini -->
-<iframe src="https://docs.google.com/forms/d/e/1FAIpQLSe2s0sRGMXSSJWXgO_shk3t8Hu0TN0_d3vwTLK8MFeOXJm4AQ/viewform?embedded=true" width="640" height="381" frameborder="0" marginheight="0" marginwidth="0">Memuat…</iframe>
-
-</body>
-</html>
     body {
-      margin: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(-45deg, #ff4e50, #f9d423, #24c6dc, #5433ff);
-      background-size: 400% 400%;
-      animation: gradient 10s ease infinite;
-      color: #fff;
+      background-color: #ffe6f0;
+      color: #333;
+      font-family: 'Arial', sans-serif;
       text-align: center;
+      padding: 50px;
     }
-
-    @keyframes gradient {
-      0% {background-position: 0% 50%;}
-      50% {background-position: 100% 50%;}
-      100% {background-position: 0% 50%;}
-    }
-
-    header {
-      padding: 40px 20px;
-    }
-
     h1 {
-      margin: 0;
-      font-size: 60px;
-      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+      color: #ff3385;
     }
-
-    nav a {
-      color: #fff;
-      text-decoration: none;
-      margin: 0 20px;
-      font-weight: bold;
+    p {
       font-size: 20px;
-      transition: color 0.3s;
-    }
-
-    nav a:hover {
-      color: #ffd700;
-    }
-
-    .section {
-      padding: 70px 20px;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 15px 30px;
       margin-top: 20px;
-      background: #fff;
-      color: #333;
-      text-decoration: none;
-      border-radius: 50px;
-      font-weight: bold;
-      transition: all 0.3s ease;
     }
-
-    .button:hover {
-      background: #ffd700;
-      color: #000;
-      transform: scale(1.05);
-      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-    }
-
-    input, textarea {
-      padding: 12px;
-      border-radius: 8px;
-      border: none;
-      margin: 10px 0;
-      width: 300px;
-      max-width: 90%;
-    }
-
-    button {
-      padding: 12px 25px;
-      border: none;
-      background: #fff;
-      color: #333;
-      font-weight: bold;
-      border-radius: 50px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    button:hover {
-      background: #ffd700;
-      color: #000;
-    }
-
-    footer {
-      padding: 30px;
-      background: rgba(0,0,0,0.3);
-      margin-top: 50px;
+    .audio-box {
+      margin-top: 40px;
     }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Selamat Datang, Teman-Temanku!</h1>
-  <nav>
-    <a href="#beranda">Beranda</a>
-    <a href="#tentang">Tentang</a>
-    <a href="#pesan">Pesan</a>
-  </nav>
-</header>
+  <h1>Hai Cintaku!</h1>
+  <p>Aku cuma mau bilang… aku sayang banget sama kamu.</p>
+  <p>Dengerin lagu ini ya, spesial buat kamu!</p>
 
-<div class="section" id="beranda">
-  <h2>Halo semuanya!</h2>
-  <p>Ini web buatan aku, Farhan. Khusus buat kalian teman-teman terbaikku!</p>
-  <a href="#tentang" class="button">Yuk kenalan!</a>
-</div>
-
-<div class="section" id="tentang">
-  <h2>Tentang Aku</h2>
-  <p>Aku Farhan, pelajar yang lagi suka banget ngulik coding HTML, CSS, dan bikin web. Terima kasih udah mampir ke web ini ya!</p>
-  <a href="#pesan" class="button">Kirim Pesan ke Aku!</a>
-</div>
-
-<div class="section" id="pesan">
-  <h2>Tulis Pesan untuk Farhan</h2>
-  <form action="https://formspree.io/f/xyzwlbkp" method="POST">
-    <input type="text" name="nama" placeholder="Nama kamu" required><br>
-    <input type="email" name="email" placeholder="Email kamu" required><br>
-    <textarea name="pesan" placeholder="Pesan untuk Farhan..." required></textarea><br>
-    <button type="submit">Kirim Pesan</button>
-  </form>
-  <br>
-  <a href="#beranda" class="button">Balik ke Atas</a>
-</div>
-
-<footer>
-  <p>© 2025 Farhan. Web ini dibuat khusus buat teman-teman terbaikku!</p>
-</footer>
-
+  
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7l1FIfZQfgFA571YzC5GDt" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
 </body>
 </html>
