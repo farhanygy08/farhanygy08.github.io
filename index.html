@@ -1,73 +1,145 @@
 <!DOCTYPE html>
-<html class="preload" lang="en">
-  <head>
-    <!-- Site designed for Drop by the team at 
-    ███╗   ██╗███████╗████████╗██╗     ██╗███████╗██╗   ██╗
-    ████╗  ██║██╔════╝╚══██╔══╝██║     ██║██╔════╝╚██╗ ██╔╝
-    ██╔██╗ ██║█████╗     ██║   ██║     ██║█████╗   ╚████╔╝ 
-    ██║╚██╗██║██╔══╝     ██║   ██║     ██║██╔══╝    ╚██╔╝  
-    ██║ ╚████║███████╗   ██║   ███████╗██║██║        ██║   
-    ╚═╝  ╚═══╝╚══════╝   ╚═╝   ╚══════╝╚═╝╚═╝        ╚═╝    -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Halo Teman-Teman Farhan!</title>
+  <style>
+    html {
+      scroll-behavior: smooth;
+    }
 
-    <!-- The name of your site that shows up in the browser tab -->
-    <title>Welcome to my site</title>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(-45deg, #ff4e50, #f9d423, #24c6dc, #5433ff);
+      background-size: 400% 400%;
+      animation: gradient 10s ease infinite;
+      color: #fff;
+      text-align: center;
+    }
 
-    <!-- Describe what your site is about -->
-    <meta name="description" content="A list of places you can find me on the web.">
+    @keyframes gradient {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
 
-    <!-- This is the small icon that shows up in the browser tab -->
-    <link rel="shortcut icon" href="/images/favicon.png">
+    header {
+      padding: 40px 20px;
+    }
 
-    <!-- Styling for this site -->
-    <link rel="stylesheet" href="/css/styles.css">
-  </head>
+    h1 {
+      margin: 0;
+      font-size: 60px;
+      text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+    }
 
-  <!-- This class is removed if the user has JavaScript enabled -->
-  <body class="no-js">
-    <header>
-      <!-- Dark mode toggle -->
-      <div class="mode-toggle">
-        <button class="[ toggle-button ] [ js-mode-toggle ]">
-          <span class="toggle-icon" aria-hidden="true"></span>
-          <span class="[ toggle-text ] [ js-mode-toggle-text ]">Switch to dark theme</span>
-        </button>
-      </div>
-    </header>
-    <main>
-      <section class="about">
-        <h1>Frodo Baggins</h1>
-        <p>Frodo is a proven leader who thrives in small teams and can go the distance.</p>
-      </section>
-      <nav class="links">
-        <!-- Update <a href=""> to point to your accounts -->
-        <!-- Update <span> to your usernames -->
-        <a href="mailto:frodo@bag.end">
-          <strong>E-mail</strong>
-          <span>frodo@bag.end</span>
-        </a>
-        <a href="https://twitter.com/frodobaggins">
-          <strong>Twitter</strong>
-          <span>@frodobaggins</span>
-        </a>
-        <a href="https://linkedin.com">
-          <strong>LinkedIn</strong>
-          <span>@frodobaggins</span>
-        </a>
-        <a href="https://github.com">
-          <strong>GitHub</strong>
-          <span>@frodobags</span>
-        </a>
-        <a href="https://codepen.io">
-          <strong>CodePen</strong>
-          <span>@frodobags</span>
-        </a>
-      </nav>
-    </main>
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 20px;
+      font-weight: bold;
+      font-size: 20px;
+      transition: color 0.3s;
+    }
 
-    <!-- Dark mode button functionality -->
-    <script src="/js/dark-mode.js"></script>
-  </body>
+    nav a:hover {
+      color: #ffd700;
+    }
+
+    .section {
+      padding: 70px 20px;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 15px 30px;
+      margin-top: 20px;
+      background: #fff;
+      color: #333;
+      text-decoration: none;
+      border-radius: 50px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+    }
+
+    .button:hover {
+      background: #ffd700;
+      color: #000;
+      transform: scale(1.05);
+      box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+    }
+
+    input, textarea {
+      padding: 12px;
+      border-radius: 8px;
+      border: none;
+      margin: 10px 0;
+      width: 300px;
+      max-width: 90%;
+    }
+
+    button {
+      padding: 12px 25px;
+      border: none;
+      background: #fff;
+      color: #333;
+      font-weight: bold;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #ffd700;
+      color: #000;
+    }
+
+    footer {
+      padding: 30px;
+      background: rgba(0,0,0,0.3);
+      margin-top: 50px;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Selamat Datang, Teman-Temanku!</h1>
+  <nav>
+    <a href="#beranda">Beranda</a>
+    <a href="#tentang">Tentang</a>
+    <a href="#pesan">Pesan</a>
+  </nav>
+</header>
+
+<div class="section" id="beranda">
+  <h2>Halo semuanya!</h2>
+  <p>Ini web buatan aku, Farhan. Khusus buat kalian teman-teman terbaikku!</p>
+  <a href="#tentang" class="button">Yuk kenalan!</a>
+</div>
+
+<div class="section" id="tentang">
+  <h2>Tentang Aku</h2>
+  <p>Aku Farhan, pelajar yang lagi suka banget ngulik coding HTML, CSS, dan bikin web. Terima kasih udah mampir ke web ini ya!</p>
+  <a href="#pesan" class="button">Kirim Pesan ke Aku!</a>
+</div>
+
+<div class="section" id="pesan">
+  <h2>Tulis Pesan untuk Farhan</h2>
+  <form action="https://formspree.io/f/yourFormLink" method="POST">
+    <input type="text" name="nama" placeholder="Nama kamu" required><br>
+    <input type="email" name="email" placeholder="Email kamu" required><br>
+    <textarea name="pesan" placeholder="Pesan untuk Farhan..." required></textarea><br>
+    <button type="submit">Kirim Pesan</button>
+  </form>
+  <br>
+  <a href="#beranda" class="button">Balik ke Atas</a>
+</div>
+
+<footer>
+  <p>© 2025 Farhan. Web ini dibuat khusus buat teman-teman terbaikku!</p>
+</footer>
+
+</body>
 </html>
