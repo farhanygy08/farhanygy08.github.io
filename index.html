@@ -2,34 +2,75 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Pesan Spesial Untuk Kamu</title>
+  <title>Kirim Pesan Anonim</title>
   <style>
     body {
-      background-color: #ffe6f0;
-      color: #333;
-      font-family: 'Arial', sans-serif;
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fefefe;
+      margin: 0;
+      padding: 20px;
       text-align: center;
-      padding: 50px;
     }
     h1 {
-      color: #ff3385;
+      color: #333;
     }
-    p {
-      font-size: 20px;
-      margin-top: 20px;
+    textarea {
+      width: 90%;
+      max-width: 400px;
+      height: 100px;
+      padding: 10px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      resize: none;
     }
-    .audio-box {
-      margin-top: 40px;
+    button {
+      padding: 10px 20px;
+      background-color: #0077ff;
+      border: none;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background-color: #005dc1;
+    }
+    .pesan {
+      background: #f0f0f0;
+      padding: 10px;
+      border-radius: 5px;
+      margin: 10px auto;
+      width: 90%;
+      max-width: 400px;
+      text-align: left;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
   </style>
 </head>
 <body>
 
-  <h1>Hai Cintaku!</h1>
-  <p>Aku cuma mau bilang… aku sayang banget sama kamu.</p>
-  <p>Dengerin lagu ini ya, spesial buat kamu!</p>
+  <h1>Kirim Pesan Anonim</h1>
+  <textarea id="pesanInput" placeholder="Tulis pesanmu di sini..."></textarea><br>
+  <button onclick="kirimPesan()">Kirim Pesan</button>
 
-  
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/7l1FIfZQfgFA571YzC5GDt" width="300" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+  <h2>Daftar Pesan</h2>
+  <div id="daftarPesan"></div>
+
+  <script>
+    function kirimPesan() {
+      var pesan = document.getElementById("pesanInput").value;
+      if (pesan.trim() !== "") {
+        var kotakPesan = document.createElement("div");
+        kotakPesan.className = "pesan";
+        kotakPesan.innerText = pesan;
+        document.getElementById("daftarPesan").prepend(kotakPesan);
+        document.getElementById("pesanInput").value = "";
+      } else {
+        alert("Pesan tidak boleh kosong!");
+      }
+    }
+  </script>
+
 </body>
 </html>
