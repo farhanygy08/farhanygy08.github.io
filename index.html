@@ -45,15 +45,7 @@
       }
     };
 
-    // Fungsi tampilkan pesan realtime
-    const daftarPesan = document.getElementById("daftarPesan");
-    onChildAdded(ref(database, "pesan"), (snapshot) => {
-      const data = snapshot.val();
-      const kotak = document.createElement("div");
-      kotak.className = "pesan";
-      kotak.textContent = data.teks;
-      daftarPesan.prepend(kotak);
-    });
+    
   </script>
 </head>
 <body>
