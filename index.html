@@ -1,76 +1,69 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Kirim Pesan Anonim</title>
+  <meta charset="UTF-8" />
+  <title>Pesan Anonim Firebase v9+</title>
   <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #fefefe;
-      margin: 0;
-      padding: 20px;
-      text-align: center;
-    }
-    h1 {
-      color: #333;
-    }
-    textarea {
-      width: 90%;
-      max-width: 400px;
-      height: 100px;
-      padding: 10px;
-      margin: 10px 0;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      resize: none;
-    }
-    button {
-      padding: 10px 20px;
-      background-color: #0077ff;
-      border: none;
-      color: white;
-      border-radius: 5px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background-color: #005dc1;
-    }
-    .pesan {
-      background: #f0f0f0;
-      padding: 10px;
-      border-radius: 5px;
-      margin: 10px auto;
-      width: 90%;
-      max-width: 400px;
-      text-align: left;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    }
+    body { font-family: sans-serif; text-align: center; padding: 20px; }
+    textarea { width: 300px; height: 100px; }
+    button { padding: 10px 20px; margin-top: 10px; }
+    .pesan { margin: 10px; padding: 10px; border: 1px solid #ccc; text-align: left; }
   </style>
+  <script type="module">
+    // Import modul Firebase yang dibutuhkan
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
+    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
+
+    // Konfigurasi Firebase kamu
+    const firebaseConfig = {
+      apiKey: "AIzaSyDpbVmwAuWq2Edyk-pdm9wTyBO_j5iKnBU",
+      authDomain: "pesan-anonim-farhan.firebaseapp.com",
+      databaseURL: "https://pesan-anonim-farhan-default-rtdb.asia-southeast1.firebasedatabase.app",
+      projectId: "pesan-anonim-farhan",
+      storageBucket: "pesan-anonim-farhan.firebasestorage.app",
+      messagingSenderId: "286955932611",
+      appId: "1:286955932611:web:ddcce4f09e4cfde85ccb76",
+      measurementId: "G-SBZCRHWN7Z"
+    };
+
+    // Inisialisasi Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+
+    // Fungsi kirim pesan
+    window.kirimPesan = function() {
+      const pesanInput = document.getElementById("pesanInput");
+      const pesan = pesanInput.value.trim();
+      if (pesan !== "") {
+        push(ref(database, "pesan"), {
+          teks: pesan,
+          waktu: Date.now()
+        });
+        pesanInput.value = "";
+      } else {
+        alert("Pesan tidak boleh kosong!");
+      }
+    };
+
+    // Fungsi tampilkan pesan realtime
+    const daftarPesan = document.getElementById("daftarPesan");
+    onChildAdded(ref(database, "pesan"), (snapshot) => {
+      const data = snapshot.val();
+      const kotak = document.createElement("div");
+      kotak.className = "pesan";
+      kotak.textContent = data.teks;
+      daftarPesan.prepend(kotak);
+    });
+  </script>
 </head>
 <body>
 
   <h1>Kirim Pesan Anonim</h1>
-  <textarea id="pesanInput" placeholder="Tulis pesanmu di sini..."></textarea><br>
-  <button onclick="kirimPesan()">Kirim Pesan</button>
+  <textarea id="pesanInput" placeholder="Tulis pesan di sini..."></textarea><br>
+  <button onclick="kirimPesan()">Kirim</button>
 
-  <h2>Daftar Pesan</h2>
+  <h2>Pesan Masuk</h2>
   <div id="daftarPesan"></div>
-
-  <script>
-    function kirimPesan() {
-      var pesan = document.getElementById("pesanInput").value;
-      if (pesan.trim() !== "") {
-        var kotakPesan = document.createElement("div");
-        kotakPesan.className = "pesan";
-        kotakPesan.innerText = pesan;
-        document.getElementById("daftarPesan").prepend(kotakPesan);
-        document.getElementById("pesanInput").value = "";
-      } else {
-        alert("Pesan tidak boleh kosong!");
-      }
-    }
-  </script>
 
 </body>
 </html>
