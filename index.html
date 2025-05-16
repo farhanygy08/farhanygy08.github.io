@@ -165,6 +165,42 @@
   }
 </style>
 </head>
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+
+<script>
+  // Konfigurasi Firebase kamu
+  const firebaseConfig = {
+    apiKey: "AIzaSyA1GUDBbXe3mGZW72t0-NVyDgP-vm-ec14",
+    authDomain: "baru-9362b.firebaseapp.com",
+    databaseURL: "https://baru-9362b-default-rtdb.firebaseio.com",
+    projectId: "baru-9362b",
+    storageBucket: "baru-9362b.appspot.com",
+    messagingSenderId: "426567397388",
+    appId: "1:426567397388:web:cee804a2e25720b04b7e29",
+    measurementId: "G-65Y037PH06"
+  };
+
+  // Inisialisasi Firebase
+  firebase.initializeApp(firebaseConfig);
+  const database = firebase.database();
+
+  // Yes button click handler
+  const yesBtn = document.getElementById('yes-btn');
+  yesBtn.addEventListener('click', () => {
+    const jawab = "Yes";
+    const waktu = new Date().toISOString();
+
+    // Simpan ke database
+    database.ref('responses/').push({
+      answer: jawab,
+      time: waktu
+    });
+
+    alert('Yay! Thank you, love!');
+  });
+</script>
 <body>
   <div class="container" role="main" aria-label="Romantic proposal message">
     <h1>Will you be my girlfriend?</h1>
