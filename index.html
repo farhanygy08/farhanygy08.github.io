@@ -1,61 +1,20 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <title>Pesan Anonim Firebase v9+</title>
-  <style>
-    body { font-family: sans-serif; text-align: center; padding: 20px; }
-    textarea { width: 300px; height: 100px; }
-    button { padding: 10px 20px; margin-top: 10px; }
-    .pesan { margin: 10px; padding: 10px; border: 1px solid #ccc; text-align: left; }
-  </style>
-  <script type="module">
-    // Import modul Firebase yang dibutuhkan
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-app.js";
-    import { getDatabase, ref, push, onChildAdded } from "https://www.gstatic.com/firebasejs/9.22.1/firebase-database.js";
-
-    // Konfigurasi Firebase kamu
-    const firebaseConfig = {
-      apiKey: "AIzaSyDpbVmwAuWq2Edyk-pdm9wTyBO_j5iKnBU",
-      authDomain: "pesan-anonim-farhan.firebaseapp.com",
-      databaseURL: "https://pesan-anonim-farhan-default-rtdb.asia-southeast1.firebasedatabase.app",
-      projectId: "pesan-anonim-farhan",
-      storageBucket: "pesan-anonim-farhan.firebasestorage.app",
-      messagingSenderId: "286955932611",
-      appId: "1:286955932611:web:ddcce4f09e4cfde85ccb76",
-      measurementId: "G-SBZCRHWN7Z"
-    };
-
-    // Inisialisasi Firebase
-    const app = initializeApp(firebaseConfig);
-    const database = getDatabase(app);
-
-    // Fungsi kirim pesan
-    window.kirimPesan = function() {
-      const pesanInput = document.getElementById("pesanInput");
-      const pesan = pesanInput.value.trim();
-      if (pesan !== "") {
-        push(ref(database, "pesan"), {
-          teks: pesan,
-          waktu: Date.now()
-        });
-        pesanInput.value = "";
-      } else {
-        alert("Pesan tidak boleh kosong!");
-      }
-    };
-
-    
-  </script>
+  <meta charset="UTF-8">
+  <title>Pesan Anonim Keren</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
 </head>
 <body>
+  <div class="container">
+    <h1>Pesan Anonim</h1>
+    <input type="text" id="namaInput" placeholder="Nama (opsional)">
+    <textarea id="pesanInput" placeholder="Tulis pesanmu di sini..."></textarea>
+    <button onclick="kirimPesan()">Kirim Pesan</button>
 
-  <h1>Kirim Pesan Anonim</h1>
-  <textarea id="pesanInput" placeholder="Tulis pesan di sini..."></textarea><br>
-  <button onclick="kirimPesan()">Kirim</button>
-
-  <h2>Pesan Masuk</h2>
-  <div id="daftarPesan"></div>
-
+    <h2>Pesan Masuk</h2>
+    <div id="daftarPesan"></div>
+  </div>
 </body>
 </html>
