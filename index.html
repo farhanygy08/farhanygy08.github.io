@@ -1,119 +1,117 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Romantic Proposal</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet" />
-  <style>
-    body {
-      margin: 0;
-      height: 100vh;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #ffafbd, #ffc3a0);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-      padding: 20px;
-    }
-    .container {
-      background: rgba(255,255,255,0.85);
-      padding: 2rem;
-      border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(255,182,193,0.4);
-      max-width: 400px;
-      width: 100%;
-    }
-    h1 {
-      font-size: 2.5rem;
-      color: #c74b73;
-      margin-bottom: 1rem;
-    }
-    p {
-      font-size: 1.2rem;
-      color: #7a454b;
-      margin-bottom: 2rem;
-    }
-    .buttons {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-    button {
-      font-family: 'Poppins', sans-serif;
-      font-size: 1.1rem;
-      padding: 0.7rem 1.6rem;
-      border-radius: 30px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-    }
-    #yes-btn {
-      background: #c74b73;
-      color: #fff;
-    }
-    #no-btn {
-      background: #f7c9d5;
-      color: #7a454b;
-    }
-    #message {
-      margin-top: 20px;
-      font-size: 1.2rem;
-      color: #c74b73;
-    }
-  </style>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Do You Want To Be My Girlfriend?</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 2.5rem 3rem;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 24px rgba(255, 72, 124, 0.4);
+    max-width: 400px;
+    width: 90%;
+  }
+  h1 {
+    font-weight: 600;
+    margin-bottom: 1rem;
+    font-size: 1.8rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  }
+  label {
+    font-size: 1.1rem;
+    display: block;
+    margin-bottom: 0.8rem;
+  }
+  input[type="text"] {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+    transition: box-shadow 0.2s ease;
+  }
+  input[type="text"]:focus {
+    outline: none;
+    box-shadow: inset 0 2px 8px rgba(0,0,0,0.25);
+  }
+  button {
+    margin-top: 1.2rem;
+    background: #fff;
+    color: #ff497c;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    padding: 0.8rem 1.6rem;
+    font-size: 1.1rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255, 72, 124, 0.5);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+  }
+  button:hover {
+    background-color: #ff497c;
+    color: white;
+    transform: scale(1.05);
+  }
+  .message {
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    min-height: 2rem;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  }
+  .error {
+    color: #ffd8d8;
+    font-weight: 500;
+  }
+</style>
 </head>
 <body>
-  <div class="container">
-    <h1>Will you be my girlfriend?</h1>
-    <p>You always brighten my day and I really like you.</p>
-    <div class="buttons">
-      <button id="yes-btn">Yes, I want to!</button>
-      <button id="no-btn">No, I don't want to!</button>
-    </div>
-    <div id="message"></div>
-  </div>
+<div class="container">
+  <h1>Do you want to be my girlfriend?</h1>
+  <label for="answerInput">Answer (yes / no):</label>
+  <input type="text" id="answerInput" placeholder="Type yes or no" autocomplete="off" />
+  <button id="submitBtn" type="button">Submit</button>
+  <div id="responseMessage" class="message"></div>
+</div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
-  
-  <script>
-    // Firebase config
-    const firebaseConfig = {
-      apiKey: "AIzaSyA1GUDBbXe3mGZW72t0-NVyDgP-vm-ec14",
-      authDomain: "baru-9362b.firebaseapp.com",
-      databaseURL: "https://baru-9362b-default-rtdb.firebaseio.com",
-      projectId: "baru-9362b",
-      storageBucket: "baru-9362b.appspot.com",
-      messagingSenderId: "426567397388",
-      appId: "1:426567397388:web:cee804a2e25720b04b7e29",
-      measurementId: "G-65Y037PH06"
-    };
+<script>
+  document.getElementById('submitBtn').addEventListener('click', function () {
+    const inputEl = document.getElementById('answerInput');
+    const respEl = document.getElementById('responseMessage');
+    const val = inputEl.value.trim().toLowerCase();
+    if (val === 'yes') {
+      respEl.textContent = 'Thank you, sayang!';
+      respEl.classList.remove('error');
+    } else if (val === 'no') {
+      respEl.textContent = 'Okay, no problem!';
+      respEl.classList.remove('error');
+    } else {
+      respEl.textContent = "Please answer with 'yes' or 'no'.";
+      respEl.classList.add('error');
+    }
+  });
 
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-
-    const yesBtn = document.getElementById('yes-btn');
-    const noBtn = document.getElementById('no-btn');
-    const message = document.getElementById('message');
-
-    yesBtn.addEventListener('click', () => {
-      const waktu = new Date().toISOString();
-      database.ref('responses/').push({
-        answer: "Yes",
-        time: waktu
-      }).then(() => {
-        message.innerText = "Terima kasih sayang!";
-      }).catch((error) => {
-        console.error('Error:', error);
-      });
-    });
-
-    noBtn.addEventListener('click', () => {
-      message.innerText = "Yah sedih deh...";
-    });
-  </script>
+  // Enter key submit
+  document.getElementById('answerInput').addEventListener('keypress', function(e){
+    if(e.key === 'Enter'){
+      document.getElementById('submitBtn').click();
+    }
+  });
+</script>
 </body>
 </html>
