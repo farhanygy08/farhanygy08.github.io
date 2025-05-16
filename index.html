@@ -1,89 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Proposal Web</title>
-
-  <!-- Firebase SDK via CDN -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
-
-  <style>
-    body {
-      font-family: sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      color: white;
-      text-align: center;
-      padding: 50px;
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Will You Be My Girlfriend? 💖</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap');
+  body {
+    margin: 0;
+    height: 100vh;
+    background: radial-gradient(circle at center, #ffd6e8, #ff9ab8 70%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Montserrat', sans-serif;
+    color: #650920;
+    overflow: hidden;
+  }
+  .container {
+    background: rgba(255, 255, 255, 0.85);
+    border-radius: 25px;
+    padding: 40px 50px;
+    text-align: center;
+    box-shadow: 0 15px 40px rgba(255, 105, 180, 0.5);
+    max-width: 400px;
+    width: 90%;
+    position: relative;
+  }
+  h1 {
+    font-family: 'Great Vibes', cursive;
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 30px;
+  }
+  button {
+    background: #ff5ca6;
+    border: none;
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    padding: 12px 35px;
+    margin: 0 10px;
+    border-radius: 35px;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 92, 166, 0.6);
+    transition: background 0.3s ease, transform 0.2s ease;
+  }
+  button:hover {
+    background: #e34e91;
+    transform: scale(1.05);
+  }
+  .yes {
+    background: #e91e63;
+    box-shadow: 0 6px 25px rgba(233, 30, 99, 0.7);
+  }
+  .yes:hover {
+    background: #c2185b;
+  }
+  .no {
+    background: #ba8d99;
+    box-shadow: 0 6px 25px rgba(186, 141, 153, 0.7);
+  }
+  .no:hover {
+    background: #a17680;
+  }
+  .result {
+    margin-top: 25px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #880e4f;
+    min-height: 48px;
+  }
+  /* Romantic hearts animation background */
+  .heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ff2d55;
+    transform: rotate(-45deg);
+    border-radius: 20px 20px 0 0;
+  }
+  .heart::before,
+  .heart::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: #ff2d55;
+    border-radius: 50%;
+  }
+  .heart::before {
+    top: -10px;
+    left: 0;
+  }
+  .heart::after {
+    left: 10px;
+    top: 0;
+  }
+  /* Animate hearts floating upward and fading */
+  @keyframes floatUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
-    input, button {
-      padding: 10px;
-      font-size: 16px;
-      margin-top: 20px;
-      border: none;
-      border-radius: 8px;
+    100% {
+      opacity: 0;
+      transform: translateY(-120px) scale(0.5);
     }
-    button {
-      background: white;
-      color: #ff497c;
-      font-weight: bold;
-      cursor: pointer;
-    }
-    .message {
-      margin-top: 20px;
-      font-size: 20px;
-      font-weight: bold;
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
-
-  <h1>Do you want to be my girlfriend?</h1>
-  <input type="text" id="answerInput" placeholder="Type yes or no" />
-  <br>
-  <button onclick="submitAnswer()">Submit</button>
-  <div id="responseMessage" class="message"></div>
+  <div class="container" role="main" aria-label="Love Proposal Form">
+    <h1>Will You Be My Girlfriend?</h1>
+    <p>Choose your answer:</p>
+    <button class="yes" aria-label="Yes, I will be your girlfriend" onclick="showResponse('yes')">Yes 💖</button>
+    <button class="no" aria-label="No, sorry" onclick="showResponse('no')">No 😔</button>
+    <div class="result" id="response" aria-live="polite" aria-atomic="true"></div>
+  </div>
 
   <script>
-    // Konfigurasi Firebase
-    const firebaseConfig = {
-      apiKey: "AIzaSyADEM3aE5TTFu2iWq-XyW8n7P0G2r6dP6g",
-      authDomain: "hasil-nembak.firebaseapp.com",
-databaseURL: "https://hasil-nembak-default-rtdb.asia-southeast1.firebasedatabase.app"
-      projectId: "hasil-nembak",
-      storageBucket: "hasil-nembak.appspot.com",
-      messagingSenderId: "7826006833",
-      appId: "1:7826006833:web:14ae4ee0cc7924108bc610",
-      measurementId: "G-289JP2M398"
-    };
+    const responseDiv = document.getElementById('response');
 
-    // Inisialisasi Firebase
-    firebase.initializeApp(firebaseConfig);
-    const database = firebase.database();
-    firebase.analytics();
-
-    // Fungsi Submit
-    function submitAnswer() {
-      const input = document.getElementById("answerInput").value.trim().toLowerCase();
-      const respEl = document.getElementById("responseMessage");
-
-      if (input === "yes") {
-        respEl.textContent = "Thank you, darling!";
-      } else if (input === "no") {
-        respEl.textContent = "Okay, no problem!";
+    function showResponse(answer) {
+      if (answer === 'yes') {
+        responseDiv.textContent = "Thank you, love! ❤️";
       } else {
-        respEl.textContent = "Please answer with 'yes' or 'no'.";
-        return;
+        responseDiv.textContent = "It's okay, no worries! 😊";
       }
-
-      // Simpan jawaban ke Firebase
-      database.ref("responses/").push({
-        answer: input,
-        timestamp: new Date().toISOString()
-      });
     }
+
+    // Create floating hearts around container for romantic vibe
+    const container = document.querySelector('.container');
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      const size = Math.random() * 15 + 10 + 'px';
+      heart.style.width = size;
+      heart.style.height = size;
+      heart.style.left = Math.random() * (container.clientWidth - 20) + 'px';
+      heart.style.top = container.clientHeight + 'px';
+      heart.style.animation = `floatUp ${4 + Math.random() * 3}s ease forwards`;
+      container.appendChild(heart);
+      setTimeout(() => {
+        heart.remove();
+      }, 7000);
+    }
+
+    setInterval(createHeart, 500);
   </script>
 </body>
 </html>
