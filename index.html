@@ -1,117 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Do You Want To Be My Girlfriend?</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
-  body {
-    margin: 0;
-    font-family: 'Poppins', sans-serif;
-    background: linear-gradient(135deg, #ff758c, #ff7eb3);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fff;
-  }
-  .container {
-    background: rgba(255, 255, 255, 0.15);
-    padding: 2.5rem 3rem;
-    border-radius: 16px;
-    text-align: center;
-    box-shadow: 0 8px 24px rgba(255, 72, 124, 0.4);
-    max-width: 400px;
-    width: 90%;
-  }
-  h1 {
-    font-weight: 600;
-    margin-bottom: 1rem;
-    font-size: 1.8rem;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
-  }
-  label {
-    font-size: 1.1rem;
-    display: block;
-    margin-bottom: 0.8rem;
-  }
-  input[type="text"] {
-    width: 100%;
-    padding: 0.6rem 1rem;
-    border: none;
-    border-radius: 8px;
-    font-size: 1rem;
-    box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
-    transition: box-shadow 0.2s ease;
-  }
-  input[type="text"]:focus {
-    outline: none;
-    box-shadow: inset 0 2px 8px rgba(0,0,0,0.25);
-  }
-  button {
-    margin-top: 1.2rem;
-    background: #fff;
-    color: #ff497c;
-    font-weight: 600;
-    border: none;
-    border-radius: 12px;
-    padding: 0.8rem 1.6rem;
-    font-size: 1.1rem;
-    cursor: pointer;
-    box-shadow: 0 5px 15px rgba(255, 72, 124, 0.5);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  button:hover {
-    background-color: #ff497c;
-    color: white;
-    transform: scale(1.05);
-  }
-  .message {
-    margin-top: 1.5rem;
-    font-size: 1.3rem;
-    font-weight: 600;
-    min-height: 2rem;
-    text-shadow: 0 1px 6px rgba(0,0,0,0.3);
-  }
-  .error {
-    color: #ffd8d8;
-    font-weight: 500;
-  }
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Proposal Web</title>
+
+  <!-- Firebase SDK via CDN -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+
+  <style>
+    body {
+      font-family: sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: white;
+      text-align: center;
+      padding: 50px;
+    }
+    input, button {
+      padding: 10px;
+      font-size: 16px;
+      margin-top: 20px;
+      border: none;
+      border-radius: 8px;
+    }
+    button {
+      background: white;
+      color: #ff497c;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .message {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+  </style>
 </head>
 <body>
-<div class="container">
+
   <h1>Do you want to be my girlfriend?</h1>
-  <label for="answerInput">Answer (yes / no):</label>
-  <input type="text" id="answerInput" placeholder="Type yes or no" autocomplete="off" />
-  <button id="submitBtn" type="button">Submit</button>
+  <input type="text" id="answerInput" placeholder="Type yes or no" />
+  <br>
+  <button onclick="submitAnswer()">Submit</button>
   <div id="responseMessage" class="message"></div>
-</div>
 
-<script>
-  document.getElementById('submitBtn').addEventListener('click', function () {
-    const inputEl = document.getElementById('answerInput');
-    const respEl = document.getElementById('responseMessage');
-    const val = inputEl.value.trim().toLowerCase();
-    if (val === 'yes') {
-      respEl.textContent = 'Thank you, sayang!';
-      respEl.classList.remove('error');
-    } else if (val === 'no') {
-      respEl.textContent = 'Okay, no problem!';
-      respEl.classList.remove('error');
-    } else {
-      respEl.textContent = "Please answer with 'yes' or 'no'.";
-      respEl.classList.add('error');
-    }
-  });
+  <script>
+    // Konfigurasi Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyADEM3aE5TTFu2iWq-XyW8n7P0G2r6dP6g",
+      authDomain: "hasil-nembak.firebaseapp.com",
+      databaseURL: "https://hasil-nembak-default-rtdb.firebaseio.com/",
+      projectId: "hasil-nembak",
+      storageBucket: "hasil-nembak.appspot.com",
+      messagingSenderId: "7826006833",
+      appId: "1:7826006833:web:14ae4ee0cc7924108bc610",
+      measurementId: "G-289JP2M398"
+    };
 
-  // Enter key submit
-  document.getElementById('answerInput').addEventListener('keypress', function(e){
-    if(e.key === 'Enter'){
-      document.getElementById('submitBtn').click();
+    // Inisialisasi Firebase
+    firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    firebase.analytics();
+
+    // Fungsi Submit
+    function submitAnswer() {
+      const input = document.getElementById("answerInput").value.trim().toLowerCase();
+      const respEl = document.getElementById("responseMessage");
+
+      if (input === "yes") {
+        respEl.textContent = "Thank you, darling!";
+      } else if (input === "no") {
+        respEl.textContent = "Okay, no problem!";
+      } else {
+        respEl.textContent = "Please answer with 'yes' or 'no'.";
+        return;
+      }
+
+      // Simpan jawaban ke Firebase
+      database.ref("responses/").push({
+        answer: input,
+        timestamp: new Date().toISOString()
+      });
     }
-  });
-</script>
+  </script>
 </body>
 </html>
